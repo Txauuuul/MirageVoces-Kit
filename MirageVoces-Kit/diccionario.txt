@@ -1,0 +1,17 @@
+# Diccionario para Whisper: palabras que decis a menudo y que Whisper escribe mal.
+# Una o varias por linea, separadas por comas. Las lineas con # se ignoran.
+# Los nombres y apodos de apodos.txt se añaden solos igualmente (si añades a alguien alli, no hace falta ponerlo aqui).
+# Si cambias algo, se nota en la siguiente partida.
+
+# Monstruos
+Bracken, Jester, Coil-head, Thumper, Hoarding bug, Snare flea, Hygrodere, Spore lizard, Nutcracker
+Baboon hawk, Eyeless dog, Forest giant, Earth Leviathan, Old Bird, Butler, Masked, enmascarado, Mimic
+Barber, Maneater, Herobrine, Rolling Giant, Peeper
+
+# Cosas del juego
+nave, chatarra, cuota, terminal, palanca, despegar, aterrizar, luna, walkie, linterna, escáner, scrap
+Company, compañía, puerta de incendios, entrada principal, salida de emergencia, trampa, mina, torreta
+Signal Translator, teletransportador, cohete, ascensor, apparatus, linterna pro, pala, señal
+
+# Expresiones vuestras
+tío, hostia, joder, corre, cuidado, ¿dónde estás?, ¿hay alguien?, ¿me oyes?

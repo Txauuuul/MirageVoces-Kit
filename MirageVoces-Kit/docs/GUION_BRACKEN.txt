@@ -1,0 +1,39 @@
+GUION DEL BRACKEN CON TU VOZ
+============================
+Graba un audio por carpeta (WhatsApp, grabadora del movil o del PC, lo que sea).
+Deja ~1 segundo de silencio entre frase y frase: el programa las parte solo.
+Con 4-6 frases por momento sobra. Mete el audio en su carpeta y arranca la partida de anfitrion.
+
+ACECHO  (carpeta acecho) - te sigue por la espalda. SUSURRANDO, cerca del micro, lento.
+  - "Te estoy viendo..."
+  - "No te des la vuelta."
+  - "Estoy justo detras."
+  - "Shhh..."
+  - "Que bien hueles..."
+  - una respiracion lenta y profunda
+
+PILLADO  (carpeta pillado) - le has mirado y se esconde. Rapido, molesto o burlon.
+  - "No me mires."
+  - "Ups."
+  - "Eso no ha pasado."
+  - "Luego vuelvo."
+  - una risita corta
+
+PERSECUCION  (carpeta persecucion) - va a por ti. Fuerte, con rabia.
+  - "¡Ven aqui!"
+  - "¿Donde vas?"
+  - "¡Te he dicho que no me mires!"
+  - "No puedes huir."
+  - un grito o gruñido
+
+MUERTE  (carpeta muerte) - te mata. Tranquilo, siniestro.
+  - "Shhh... ya esta."
+  - "Uno menos."
+  - "Te lo adverti."
+  - un "crac" con la boca
+
+ARRASTRE  (carpeta arrastre) - se lleva tu cuerpo. Tranquilo, casi cantando.
+  - "Te vienes conmigo."
+  - "Vamos a casa."
+  - "Nadie te va a echar de menos."
+  - tararear una cancioncita
