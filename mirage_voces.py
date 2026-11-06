@@ -248,7 +248,9 @@ class Curador:
         self._vocab_cache = (cambio, texto, conocidas)
         return texto, conocidas
 
-    def transcribir(self, ruta):
+    def transcribir(self, ruta, rapido=False):
+        """rapido: para la partida cuando hay cola. Sin marcas de tiempo por palabra (solo hacen falta para
+        recortar respuestas) y con menos opciones comparadas: tarda bastante menos."""
         import whisper
         audio = whisper.load_audio(ruta)
         dur = len(audio) / whisper.audio.SAMPLE_RATE
@@ -257,9 +259,10 @@ class Curador:
         modelo = self._whisper()
         prompt, conocidas = self.vocabulario()
         opciones = dict(language=self.cfg["idioma"], fp16=self.dispositivo == "cuda", condition_on_previous_text=False,
-                        temperature=0, word_timestamps=True, initial_prompt=prompt)
+                        temperature=0, word_timestamps=not rapido, initial_prompt=prompt)
         if self.dispositivo == "cuda":
-            opciones["beam_size"] = self.cfg.get("beam_size", 3)  # compara varias opciones: mas preciso
+            # compara varias opciones: mas preciso, pero mas lento
+            opciones["beam_size"] = self.cfg.get("beam_size_vivo", 1) if rapido else self.cfg.get("beam_size", 3)
         # Un "jajaja" o un ruido pueden hacer que Whisper escriba sin parar: una frase de 15 s cabe de sobra en 120.
         opciones["sample_len"] = 120
         r = modelo.transcribe(audio, **opciones)
@@ -447,17 +450,18 @@ class Curador:
         except OSError:
             return False
 
-    def procesar_archivo(self, fuente, f, etiqueta=""):
-        """Transcribe, clasifica y guarda o descarta una grabacion. Devuelve su entrada del indice (o None)."""
+    def procesar_archivo(self, fuente, f, etiqueta="", rapido=False):
+        """Transcribe, clasifica y guarda o descarta una grabacion. Devuelve su entrada del indice (o None).
+        rapido: en partida con cola; las respuestas cortas de las que se guardan se sacan luego, en un rato libre."""
         ruta = os.path.join(fuente.origen, f)
         try:
-            t = self.transcribir(ruta)
+            t = self.transcribir(ruta, rapido=rapido)
         except Exception as e:  # archivo corrupto o a medio escribir
             print(f"  {etiqueta}{f}: no se pudo leer ({e})")
             return None
         cats, motivo = self.clasificar(t)
         # Antes de guardarla o tirarla: los "Si", "Estoy aqui"... que tenga sirven para contestar.
-        if motivo not in ("frase inventada por Whisper", "ruido o silencio", "demasiado larga"):
+        if not rapido and motivo not in ("frase inventada por Whisper", "ruido o silencio", "demasiado larga"):
             self.resp.extraer(fuente.clave, ruta, t, os.path.splitext(f)[0])
         importada = f.startswith("imp_")
         # Lo que se grabo a proposito se guarda aunque Whisper no lo entienda (un susurro, un grito raro).
@@ -465,7 +469,7 @@ class Curador:
             cats = ["frase"]
         entrada = {"jugador": fuente.jugador, "texto": t["texto"], "duracion": round(t["dur"], 2),
                    "confianza": round(t["confianza"], 3), "fecha": dt.datetime.now().isoformat(timespec="seconds"),
-                   "resp": 2}
+                   "resp": 0 if rapido else 2}
         if cats:
             opus = os.path.splitext(f)[0] + ".opus"
             activa = os.path.join(fuente.activas, opus)
@@ -689,14 +693,18 @@ class Curador:
                         borrados += 1
         return creados, borrados
 
-    def respuestas_pendientes(self):
-        """Saca las respuestas cortas de las grabaciones curadas antes de que existiera esto (una sola vez),
-        incluidas las descartadas que aun queden en disco."""
-        hechas = 0
+    def respuestas_pendientes(self, limite=None):
+        """Saca las respuestas cortas de las grabaciones que aun no las tienen sacadas (las de antes de que existiera
+        esto, y las que se guardaron en modo rapido durante una partida con mucha gente), incluidas las descartadas
+        que aun queden en disco. limite: cuantas mirar como mucho (en vivo, de una en una en los ratos libres)."""
+        hechas = vistas = 0
         for clave, e in list(self.indice.items()):
             hecho = e.get("resp", 0)
             if hecho >= 2:
                 continue
+            if limite is not None and vistas >= limite:
+                break
+            vistas += 1
             jugador, f = clave.split("/", 1)
             rutas = [self._abs(e[k]) for k in ("activa", "copia") if e.get(k)]
             rutas.append(os.path.join(self.desc, jugador, f))
@@ -710,7 +718,8 @@ class Curador:
                 except Exception as ex:
                     print(f"  {f}: no se pudo leer ({ex})")
             e["resp"] = 2
-        self._guardar_indice()
+        if limite is None:
+            self._guardar_indice()
         if hechas:
             self.resp.guardar()
         return hechas

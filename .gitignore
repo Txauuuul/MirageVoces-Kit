@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+# Lo que crea cada uno al usarlo (nombres, rutas): no se sube
+config.local.json

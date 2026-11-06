@@ -103,7 +103,9 @@ def generar(mirage_dir, nombres=None, salida=None):
     """Crea la pagina y devuelve su ruta (o None si no hubo partida)."""
     vivo = os.path.join(mirage_dir, "Centralizado", "Vivo")
     eventos = [e for e in leer_jsonl(os.path.join(vivo, "eventos.jsonl")) if e.get("tipo") != "invocacion"]
-    todas = leer_jsonl(os.path.join(vivo, "resultados.jsonl"))
+    # tarde.jsonl: lo que se entendio cuando ya era tarde para reaccionar (partidas con mucha gente)
+    todas = leer_jsonl(os.path.join(vivo, "resultados.jsonl")) + leer_jsonl(os.path.join(vivo, "tarde.jsonl"))
+    todas.sort(key=lambda f: f.get("inicio") or f.get("t", 0))
     frases = [f for f in todas if f.get("texto")]
     if not eventos and not todas:
         return None
