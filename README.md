@@ -1,12 +1,40 @@
 # MirageVoces – Kit del anfitrión / Host Kit
 
-**🇬🇧 [English](#-english) · 🇪🇸 [Español](#-español)**
+**🆕 [What's new](#-whats-new--novedades) · 🇬🇧 [English](#-english) · 🇪🇸 [Español](#-español)**
 
 Host kit for the Lethal Company mod **[MirageVoces](https://thunderstore.io/c/lethal-company/p/Lloreria/MirageVoces/)**.
 Without it, the mod does very little.
 
 *Kit para quien hace de **anfitrión** con el mod de Lethal Company
 **[MirageVoces](https://thunderstore.io/c/lethal-company/p/Lloreria/MirageVoces/)**. Sin este kit, el mod casi no hace nada.*
+
+---
+
+## 🆕 What's new · Novedades
+
+### Host Kit
+**1.1** · 2026-11-06 · *Live Whisper keeps up with big lobbies · Whisper en vivo aguanta partidas con mucha gente*
+- Only listens to players **alive on a moon**: ship talk and dead players are skipped, so it no longer falls behind with 8-10 people. · *Solo escucha a los **vivos en una luna**: lo que se dice en la nave o estando muerto se ignora, y ya no se retrasa con 8-10 personas.*
+- One line at a time, newest first, with a faster mode when lines pile up. · *De una en una, lo más nuevo primero, y modo rápido cuando hay cola.*
+- Monsters never answer something said more than 20 s ago. · *Los monstruos nunca contestan algo dicho hace más de 20 s.*
+- If it still falls behind, it keeps only each player's most important line (screams, short questions). · *Si aun así se retrasa, de cada uno escucha solo lo más importante (gritos, preguntas cortas).*
+- Stops a few seconds after you close the game. · *Se cierra a los pocos segundos de cerrar el juego.*
+
+**1.0** · 2026-11-05 · *First public release · Primera versión pública*
+- One-click installer (`INSTALAR.bat`), Whisper **turbo** with your nicknames and game words, smart answers, conversations, Bracken voice and the night recap page. · *Instalador de un clic, Whisper **turbo** con vuestros apodos y palabras del juego, respuestas con cabeza, conversaciones, voz del Bracken y resumen de la noche.*
+
+### Mod ([Thunderstore](https://thunderstore.io/c/lethal-company/p/Lloreria/MirageVoces/))
+| Version | What's new · Novedades |
+|---|---|
+| **0.8.2** | Host Kit made public. · *Kit del anfitrión público.* |
+| **0.8.1** | **Conversations**: the voice that answered you keeps answering, from the same place. · ***Conversaciones**: la voz que te contestó sigue contestándote desde el mismo sitio.* |
+| **0.8.0** | **Smart answers**: understands what was said and picks the best line from your library, even saying your name. · ***Respuestas con cabeza**: entiende lo que se dice y elige la mejor frase, incluso con tu nombre.* |
+| **0.7.0** | Records every player at all times, however far away. · *Graba a todos en todo momento, estén donde estén.* |
+| **0.6.x** | Night log for the recap, death screams kept, real voices only (never pitch-shifted), rarer "alone" voices. · *Diario de la noche, se guarda el grito al morir, voces sin modular, susurros "solo" más raros.* |
+| **0.5.x** | No name tags, last words, alone in the dark, ship speaker. The mod no longer runs any program. · *Sin nombres, últimas palabras, solo en la oscuridad, altavoz de la nave. El mod ya no ejecuta programas.* |
+| **0.4.x** | Bracken with the host's voice and aggressive Bracken; summons need *"que venga el…"*. · *Bracken con tu voz y Bracken agresivo; para invocar hay que decir "que venga el…".* |
+| **0.3.x** | Live Whisper: monsters answer questions, spoken summons, voice test. · *Whisper en vivo: los monstruos contestan, invocaciones por voz, prueba de voces.* |
+| **0.1-0.2** | Friends' voices recorded by the host; whispering corpses, fake walkies, voices behind doors. · *Grabación de voces de los amigos; cadáveres que susurran, walkies falsos, voces tras las puertas.* |
 
 ---
 
